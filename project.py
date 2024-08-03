@@ -11,7 +11,7 @@ REQUIRED_KEYS = ["name", "sys", "weather", "main", "wind"]
 def get_response(city, units="metric",lang=""):
     if units.strip().lower() not in UNITLIST:
         raise ValueError("Units is incorectly defined")
-    call = f"{URL}q={city}&appid={API}&units={units}&lang={lang}"
+    call = f"{URL}q={city}&appid={API}&units={units}&lang={lang.strip().lower()}"
     try:
         response = requests.get(call).json()
     except requests.RequestException as e:
@@ -76,13 +76,14 @@ def main():
         parser.add_argument("-r", default = "y", help = "Retrieve city automatically? (y/n): ", type=str)
         parser.add_argument("-g", default = "y", help = "Create graph for weather? (y/n): ", type=str)
         parser.add_argument("-u", default = "standard", help = "Enter your units (standard, metric or imperial): ", type=str)
+        parser.add_argument("-l", default = "", help = "Enter your language (UA, TR, HI etc): ", type=str)
         args = parser.parse_args()
         city = get_city_input(args.r)
-        response = get_response(city, args.u)
+        response = get_response(city, args.u,args.l)
         print_info(response)
-        if args.g=="y":
+        if args.g.strip().lower()=="y":
             visualize_weather(response)
-        elif args.g!="n":
+        elif args.g.strip().lower()!="n":
             raise ValueError("-g should end with y or n") 
     except Exception as e:
         print(e)

@@ -10,11 +10,10 @@ https://www.youtube.com/watch?v=nfFfA1zdz-o
 
 ## Installation
 
-Install my-project with npm
+Clone the project
 
 ```bash
-    npm install my-project
-    cd my-project
+    git clone https://github.com/R3ndrex/Weather-Report-for-Today.git
 ```  
 Install dependencies
 ```
@@ -22,14 +21,15 @@ Install dependencies
 ```
 Usage
 ```
-    python project.py
-    Retrieve address automatically or enter manually (Write 1 or 2):
+    python project.py -h
+usage: project.py [-h] [-r R] [-g G] [-u U]
+
+options:
+  -h, --help  show this help message and exit
+  -r R        Retrieve city automatically? (y/n):
+  -g G        Create graph for weather? (y/n):
+  -u U        Enter your units (standard, metric or imperial):
 ```
-Enter "1" or "2". If you written "2", you will need to type city of choice. Case doesn't matter 
-```
-    Enter your units (standard, metric or imperial): 
-```
-Enter "standard", "metric" or "imperial". Case doesn't matter.
 
 Example of a possible result
 ```
