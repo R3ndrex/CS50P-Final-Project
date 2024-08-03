@@ -44,34 +44,12 @@ def get_city_input(prompt=""):
 def check_response(response)-> None:
     if not all(key in response for key in REQUIRED_KEYS):
         raise ValueError("Invalid response")
-    
-def visualize_weather(response):
-    check_response(response)
-    temperatures = [
-        response['main']['temp_min'],
-        response['main']['temp'],
-        response['main']['temp_max'],
-        response['main']['feels_like']
-        ]
-    labels = ['Min Temp', 'Current Temp', 'Max Temp', 'Feels Like'] 
-    adjusted_temperatures = [temp - -20  for temp in temperatures]
-    
-    plt.figure(figsize=(8, 6))
-    plt.bar(labels, adjusted_temperatures, bottom=-20 )
-    plt.title(f"Temperature in {response['name']} ({response['sys']['country']})",pad=25)
-    plt.ylabel('Temperature')
-    plt.ylim(-20, max(temperatures) + 10)
-    for i, v in enumerate(temperatures):
-        plt.text(i, v, f"{v:.1f}", ha='center', va='bottom')
-    plt.show()
-
 def main():
     try:
         city = get_city_input(input("Retrieve city automatically or enter manually (Write 1 or 2): "))
         units = input("Enter your units (standard, metric or imperial): ")
         response = get_response(city, units)
         print_info(response)
-        visualize_weather(response)
     except Exception as e:
         print(e)
 
