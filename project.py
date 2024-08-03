@@ -45,7 +45,9 @@ def check_response(response)-> None:
     if not all(key in response for key in REQUIRED_KEYS):
         raise ValueError("Invalid response")
     
-def visualize_weather(response):
+def visualize_weather(response=""):
+    if response is None:
+        raise ValueError("Response is not defined")
     check_response(response)
     temperatures = [
         response['main']['temp_min'],

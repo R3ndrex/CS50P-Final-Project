@@ -39,3 +39,5 @@ def test_visualize_weather():
         project.visualize_weather("qwer")
     with pytest.raises(ValueError):
         project.visualize_weather("")
+    with pytest.raises(ValueError):
+        project.visualize_weather("")
