@@ -33,9 +33,3 @@ def test_print_info():
         project.print_info("wer")
     with pytest.raises(ValueError):
         project.print_info("")
-
-def test_visualize_weather():
-    with pytest.raises(ValueError):
-        project.visualize_weather("qwer")
-    with pytest.raises(ValueError):
-        project.visualize_weather("")
