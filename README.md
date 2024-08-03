@@ -83,16 +83,6 @@ This function checks if the API response contains all the required keys:
 1. Checks that all keys from the required_keys list are present in the response.
 2. If at least one key is missing, it throws a ValueError.
 
-#### visualize_weather() visualizes temperature data as a histogram:
-1. Checks the validity of the response using the check_response().
-2. Extracts temperature values ​​from the response.
-3. Generates a list of labels for temperatures.
-4. Adapts temperatures for easy display on a graph.
-5. Creates a histogram using the matplotlib library.
-6. Sets the title and axis labels.
-7. Displays temperature values ​​on a graph.
-8. Shows a graph.
-
 #### main() visualizes temperature data as a histogram:
 1. Prompts the user to determine the city (automatically or manually).
 2. Prompts the user for temperature units.
