@@ -1,6 +1,7 @@
 import geocoder  # type: ignore 
 import requests  # type: ignore
 import matplotlib.pyplot as plt # type: ignore
+import argparse
 
 URL = "https://api.openweathermap.org/data/2.5/weather?"
 API = "8faa0fdf378d1e477bbe2071dc516d9f"
@@ -33,19 +34,23 @@ def print_info(response) -> None:
 def get_city_input(prompt=""):
     if prompt is None:
         raise ValueError("Prompt is not defined")
-    match int(prompt):
-        case 2:
+    if type(prompt) is int:
+        raise ValueError("Prompt cant be a number")
+    match prompt.strip().lower():
+        case "n":
             return input("Enter your city: ")
-        case 1:
+        case "y":
             return geocoder.ip("me").city
         case _:
-            raise ValueError("Prompt is incorectly defined")
+            raise ValueError("-n should end with y or n")
 
 def check_response(response)-> None:
     if not all(key in response for key in REQUIRED_KEYS):
         raise ValueError("Invalid response")
     
-def visualize_weather(response):
+def visualize_weather(response = "")->None:
+    if response is None:
+        raise ValueError("Response cant be None")
     check_response(response)
     temperatures = [
         response['main']['temp_min'],
@@ -67,11 +72,18 @@ def visualize_weather(response):
 
 def main():
     try:
-        city = get_city_input(input("Retrieve city automatically or enter manually (Write 1 or 2): "))
-        units = input("Enter your units (standard, metric or imperial): ")
-        response = get_response(city, units)
+        parser = argparse.ArgumentParser()
+        parser.add_argument("-r", default = "y", help = "Retrieve city automatically? (y/n): ", type=str)
+        parser.add_argument("-g", default = "y", help = "Create graph for weather? (y/n): ", type=str)
+        parser.add_argument("-u", default = "standard", help = "Enter your units (standard, metric or imperial): ", type=str)
+        args = parser.parse_args()
+        city = get_city_input(args.r)
+        response = get_response(city, args.u)
         print_info(response)
-        visualize_weather(response)
+        if args.g=="y":
+            visualize_weather(response)
+        elif args.g!="n":
+            raise ValueError("-g should end with y or n") 
     except Exception as e:
         print(e)
 

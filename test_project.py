@@ -11,12 +11,14 @@ def test_get_city_input_error():
     with pytest.raises(ValueError):
         project.get_city_input("3")
     with pytest.raises(ValueError):
-        project.get_city_input()
+        project.get_city_input("1")
+    with pytest.raises(ValueError):
+        project.get_city_input(1)
 
 def test_get_city_input():
-    assert project.get_city_input("1") == geocoder.ip("me").city
-    assert project.get_city_input("          1                   ") == geocoder.ip("me").city
-    assert project.get_city_input(1) == geocoder.ip("me").city
+    assert project.get_city_input("y") == geocoder.ip("me").city
+    assert project.get_city_input("Y") == geocoder.ip("me").city
+    assert project.get_city_input(" Y ") == geocoder.ip("me").city
 
 def test_get_response():
     with pytest.raises(ValueError):
@@ -39,3 +41,5 @@ def test_visualize_weather():
         project.visualize_weather("qwer")
     with pytest.raises(ValueError):
         project.visualize_weather("")
+    with pytest.raises(ValueError):
+        project.visualize_weather()
