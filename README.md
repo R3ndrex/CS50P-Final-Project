@@ -4,7 +4,7 @@ This program is a weather information tool that retrieves and displays (via matp
 
 ## Video Demo
 
-https://www.youtube.com/watch?v=nfFfA1zdz-o
+https://youtu.be/lCuyh47ohYQ
 
 
 
