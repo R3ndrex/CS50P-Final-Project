@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt # type: ignore
 import argparse
 
 URL = "https://api.openweathermap.org/data/2.5/weather?"
-API = "8faa0fdf378d1e477bbe2071dc516d9f"
+API = "YOUR API FROM OPENWEATHERMAP"
 UNITLIST = ["standard", "metric", "imperial"]
 REQUIRED_KEYS = ["name", "sys", "weather", "main", "wind"]
 
